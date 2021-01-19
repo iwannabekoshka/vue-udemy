@@ -1,5 +1,19 @@
+Vue.createApp({
+	data() {
+		return {
+			list: [],
+			input: '',
+		}
+	},
+	methods: {
+		addItem() {
+			this.list.push(this.input)
+			this.input = ''
+		}
+	}
+}).mount('#app')
 
-
+/*
 const input = document.querySelector('input')
 const btn = document.querySelector('button')
 const list = document.querySelector('ul')
@@ -12,4 +26,4 @@ function addListItem() {
 	input.value = ''
 }
 
-btn.addEventListener('click', addListItem)
+btn.addEventListener('click', addListItem)*/
