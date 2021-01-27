@@ -6,6 +6,11 @@ const app = Vue.createApp({
 			boxCActive: false,
 		}
 	},
+	computed: {
+		boxAClasses() {
+			return { active:this.boxAActive }
+		}
+	},
 	methods: {
 		activateBox(boxName) {
 			switch (boxName) {
