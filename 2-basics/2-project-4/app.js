@@ -9,6 +9,9 @@ const app = Vue.createApp({
 	computed: {
 		boxAClasses() {
 			return { active:this.boxAActive }
+		},
+		boxBClasses() {
+			return ['demo', { active:this.boxBActive }]
 		}
 	},
 	methods: {
