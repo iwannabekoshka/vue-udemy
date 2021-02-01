@@ -18,25 +18,33 @@
 </header>
 <div id="game">
 	<section id="monster" class="container">
-		<h2>Monster Health</h2>
+		<h2>Monster Health {{ monsterHealth }}</h2>
 		<div class="healthbar">
-			<div class="healthbar__value"></div>
+			<div class="healthbar__value" :style="monsterHealthBarWidth"></div>
 		</div>
 	</section>
 	<section id="player" class="container">
-		<h2>Your Health</h2>
+		<h2>Your Health {{ playerHealth }}</h2>
 		<div class="healthbar">
-			<div class="healthbar__value"></div>
+			<div class="healthbar__value" :style="playerHealthBarWidth"></div>
 		</div>
 	</section>
-	<section id="controls">
-		<button>ATTACK</button>
-		<button>SPECIAL ATTACK</button>
-		<button>HEAL</button>
-		<button>SURRENDER</button>
+	<section class="container" v-if="winner">
+		<h2>Game Over!</h2>
+		<h3 v-if="winner === 'player'">You Win!</h3>
+		<h3 v-else-if="winner === 'monster'">You Lose!</h3>
+		<h3 v-else>Draw!</h3>
+		<button @click="restart">Restart</button>
+	</section>
+	<section id="controls" v-else>
+		<button @click="playerAttack">ATTACK</button>
+		<button :disabled="cantUseSpecialAttack" @click="playerSpecialAttack">SPECIAL ATTACK</button>
+		<button :disabled="cantHeal" @click="playerHeal">HEAL</button>
+		<button @click="surrender">SURRENDER</button>
 	</section>
 	<section id="log" class="container">
 		<h2>Battle Log</h2>
+		<h3>Round: {{ currentRound+1 }}</h3>
 		<ul></ul>
 	</section>
 </div>
