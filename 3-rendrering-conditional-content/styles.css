@@ -54,6 +54,7 @@ header {
 #user-goals input {
   font: inherit;
   border: 1px solid #ccc;
+  margin-right: 1rem;
 }
 
 #user-goals input:focus {
