@@ -11,7 +11,9 @@ const app = Vue.createApp({
 			monsterHealth: 100,
 			currentRound: 0,
 			specialAttackCD: 0,
-			winner: null
+			winner: null,
+
+			battleLog: []
 		}
 	},
 	watch: {
@@ -46,15 +48,31 @@ const app = Vue.createApp({
 		},
 		cantHeal() {
 			return this.playerHealthMAX === this.playerHealth;
-		}
+		},
 	},
 	methods: {
+		logMessageWhoClass(who) {
+			if (who === 'Player') {
+				return 'log--player'
+			} else {
+				return 'log--monster'
+			}
+		},
+		logMessageActionClass(action) {
+			if (action === 'attacks for' || action === 'SUPER attacks for') {
+				return 'log--damage'
+			} else {
+				return 'log--heal'
+			}
+		},
 		playerAttack() {
 			this.currentRound++;
 			if (this.specialAttackCD !== 0) this.specialAttackCD--;
 
 			const attackValue = getRandomValue(5, 12);
 			this.monsterHealth -= attackValue;
+			this.addLogMessage('Player', 'attacks for', attackValue)
+
 			this.monsterAttack();
 		},
 		playerSpecialAttack() {
@@ -63,6 +81,8 @@ const app = Vue.createApp({
 
 			const attackValue = getRandomValue(10, 25);
 			this.monsterHealth -= attackValue;
+			this.addLogMessage('Player', 'SUPER attacks for', attackValue)
+
 			this.monsterAttack();
 		},
 		playerHeal() {
@@ -75,12 +95,15 @@ const app = Vue.createApp({
 			} else {
 				this.playerHealth += healValue;
 			}
+			this.addLogMessage('Player', 'heals for', healValue)
 
 			this.monsterAttack();
 		},
 		monsterAttack() {
 			const attackValue = getRandomValue(8, 15);
 			this.playerHealth -= attackValue;
+
+			this.addLogMessage('Monster', 'attacks for', attackValue)
 		},
 		restart() {
 			this.playerHealth = this.playerHealthMAX;
@@ -88,9 +111,18 @@ const app = Vue.createApp({
 			this.currentRound = 0;
 			this.specialAttackCD = 0;
 			this.winner = null;
+			this.battleLog = [];
 		},
 		surrender() {
 			this.winner = 'monster';
+		},
+		addLogMessage(who, action, value) {
+			this.battleLog.unshift({
+				id: Date.now(),
+				who: who,
+				action: action,
+				value: value
+			})
 		}
 	},
 })

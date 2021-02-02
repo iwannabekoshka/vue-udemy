@@ -117,3 +117,6 @@ button:disabled {
 .log--heal {
 	color: green;
 }
+span {
+	margin-right: .3rem;
+}
