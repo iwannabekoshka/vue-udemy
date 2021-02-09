@@ -3,11 +3,7 @@ const app = Vue.createApp({
 		return {
 			friends: [
 				{
-					id: '1',
-					name: 'Anchishkin Alexandr',
-					phone: '1337-228-359',
-					email: 'ebatorzemli3000@huya.com',
-					showDetails: false,
+
 				},
 				{
 					id: '2',
@@ -25,6 +21,35 @@ const app = Vue.createApp({
 		}
 	}
 
+})
+
+app.component('friend-card', {
+	template: `
+	<li>
+		<h2>{{friend.name}}</h2>
+		<button @click="toggleDetails(friend.id)">Show Details</button>
+		<ul v-if="detailsAreVisible">
+			<li><strong>Phone:</strong> {{friend.phone}}</li>
+			<li><strong>Email:</strong> {{friend.email}}</li>
+		</ul>
+	</li>
+	`,
+	data() {
+		return {
+			detailsAreVisible: false,
+			friend: {
+				id: '1',
+				name: 'Anchishkin Alexandr',
+				phone: '1337-228-359',
+				email: 'ebatorzemli3000@huya.com',
+			}
+		}
+	},
+	methods: {
+		toggleDetails() {
+			this.detailsAreVisible = !this.detailsAreVisible
+		}
+	}
 })
 
 app.mount('#app')
