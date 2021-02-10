@@ -2,17 +2,20 @@
 	<header>
 		<h1>My colleagues</h1>
 	</header>
-	<add-friend @add-friend="addFriend"/>
+	<add-friend
+			@add-friend="addFriend"
+	/>
 	<ul>
 		<friend-contact
 			v-for="friend in friends"
 			:key = friend.id
-			:friend-id="friend.id"
-			:friend-name="friend.name"
-			:friend-phone="friend.phone"
-			:friend-email="friend.email"
-			:friend-favourite="friend.favourite"
+			:id="friend.id"
+			:name="friend.name"
+			:phone="friend.phone"
+			:email="friend.email"
+			:favourite="friend.favourite"
 			@toggle-favourite="toggleFavourite"
+			@delete="deleteFriend"
 		/>
 	</ul>
 </template>
@@ -26,21 +29,21 @@
 			return {
 				friends: [
 					{
-						id: 1,
+						id: '1',
 						name: 'Sasha Anchous',
 						phone: '359-1337-1900',
 						email: 'nagibatorzemli3000@kek.com',
 						favourite: 1,
 					},
 					{
-						id: 2,
+						id: '2',
 						name: 'Nastya Unicorn',
 						phone: '100-149-247',
 						email: 'cornflowerblue@purrple.com',
 						favourite: true,
 					},
 					{
-						id: 3,
+						id: '3',
 						name: 'Iluha Master',
 						phone: 'nonofurbusiness',
 						email: 'yatvoyubdshatal@lk.com',
@@ -63,6 +66,9 @@
 					favourite: false
 				}
 				this.friends.push(newFriend)
+			},
+			deleteFriend(id) {
+				this.friends = this.friends.filter( friend => friend.id !== id)
 			}
 		}
 	}
