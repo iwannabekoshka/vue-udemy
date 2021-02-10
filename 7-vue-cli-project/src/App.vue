@@ -2,6 +2,7 @@
 	<header>
 		<h1>My colleagues</h1>
 	</header>
+	<add-friend @add-friend="addFriend"/>
 	<ul>
 		<friend-contact
 			v-for="friend in friends"
@@ -18,8 +19,9 @@
 
 <script>
 	import FriendContact from "../components/FriendContact";
+	import AddFriend from "../components/AddFriend";
 	export default {
-		components: {FriendContact},
+		components: {AddFriend, FriendContact},
 		data () {
 			return {
 				friends: [
@@ -51,6 +53,16 @@
 			toggleFavourite(friendId) {
 				const identifiedFriend = this.friends.find((friend) => friend.id === friendId);
 				identifiedFriend.favourite = !identifiedFriend.favourite
+			},
+			addFriend(name, phone, email) {
+				const newFriend = {
+					id: Date.now(),
+					name: name,
+					phone: phone,
+					email: email,
+					favourite: false
+				}
+				this.friends.push(newFriend)
 			}
 		}
 	}
@@ -88,7 +100,8 @@
 		list-style: none;
 	}
 
-	#app li {
+	#app li,
+	#app form {
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 		margin: 1rem auto;
 		border-radius: 10px;

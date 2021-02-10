@@ -13,6 +13,7 @@
 <script>
 	export default {
 		name: 'friend-contact',
+		emits: ['toggle-favourite'],
 		props: {
 			friendId: {
 				type: Number,
