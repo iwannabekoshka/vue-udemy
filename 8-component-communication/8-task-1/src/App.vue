@@ -49,6 +49,8 @@
 		box-shadow: 0 0 10px rgba(0, 0, 0, .5);
 
 		padding: 1rem;
+	}
+	.container:not(:last-child) {
 		margin-right: 2rem;
 	}
 	.container > h1 {
