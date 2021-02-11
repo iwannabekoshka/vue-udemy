@@ -1,12 +1,18 @@
 <template>
 	<div>
 		<TheHeader />
-		<BadgeList />
-		<UserInfo
+
+		<base-card>
+			<BadgeList />
+		</base-card>
+
+		<base-card>
+			<UserInfo
 				:full-name="activeUser.name"
 				:info-text="activeUser.description"
 				:role="activeUser.role"
-		/>
+			/>
+		</base-card>
 	</div>
 </template>
 
@@ -14,9 +20,10 @@
 import TheHeader from "./components/TheHeader";
 import UserInfo from "./components/UserInfo";
 import BadgeList from "./components/BadgeList";
+import BaseCard from "./components/BaseCard";
 
 export default {
-	components: {BadgeList, UserInfo, TheHeader},
+	components: {BaseCard, BadgeList, UserInfo, TheHeader},
 	data() {
 		return {
 			activeUser: {
