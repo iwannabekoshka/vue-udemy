@@ -14,6 +14,7 @@
 import TheHeader from "./components/TheHeader";
 import UserInfo from "./components/UserInfo";
 import BadgeList from "./components/BadgeList";
+
 export default {
 	components: {BadgeList, UserInfo, TheHeader},
 	data() {
@@ -31,6 +32,8 @@ export default {
 <style>
 	html {
 		font-family: sans-serif;
+		--primary-color: cornflowerblue;
+		--secondary-color: orangered;
 	}
 
 	body {

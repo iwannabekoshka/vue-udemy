@@ -16,7 +16,7 @@
 	};
 </script>
 
-<style>
+<style scoped>
 	.badge {
 		display: inline-block;
 		padding: 0.5rem 1rem;
@@ -26,12 +26,12 @@
 	}
 
 	.badge--admin {
-		background-color: #810036;
+		background-color: var(--secondary-color);
 		color: white;
 	}
 
 	.badge--author {
-		background-color: #002c8a;
+		background-color: var(--primary-color);
 		color: white;
 	}
 </style>
