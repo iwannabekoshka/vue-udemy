@@ -1,11 +1,23 @@
 <template>
 	<div>
-		<header>
-			<slot name="header"></slot>
+		<header v-if="$slots.header">
+			<slot name="header">
+				<p>Base header</p>
+			</slot>
 		</header>
-		<slot></slot>
+		<slot>
+			<p>Base text here, coz no content provided</p>
+		</slot>
 	</div>
 </template>
+
+<script>
+export default {
+	mounted() {
+		console.log(this.$slots.header)
+	}
+}
+</script>
 
 <style scoped>
 div {
